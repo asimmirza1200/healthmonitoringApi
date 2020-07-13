@@ -83,7 +83,10 @@ const loginDoctor =  (req, res,next) =>{
     })
     .catch(error=>{
         res.json({
-            message:error
+            message: "invalid Login Credentials",
+            data:[],
+            code:"505",
+            status:"false"  
         })
     })
       

@@ -5,6 +5,7 @@ const DoctorController=require("../controllers/DoctorController")
 const PatientController=require("../controllers/PatientController")
 
 const jwt = require('jsonwebtoken');
+const MedicineController = require("../controllers/MedicineController");
 const accessTokenSecret = 'youraccesstokensecret';
 
 const authenticateJWT = (req, res, next) => {
@@ -37,6 +38,10 @@ router.post('/findDoctor', DoctorController.singleDoctor);
 router.post('/insertDoctor', DoctorController.insertDoctor);
 router.post('/assignDoctor', DoctorController.assignDoctor);
 router.post('/getAssignDoctor',authenticateJWT, DoctorController.getAssignDoctor);
+
+router.post('/getAssignMedicineData',authenticateJWT, MedicineController.getAssignMedicineData);
+router.post('/insertMedicineData',authenticateJWT, MedicineController.insertMedicineData);
+router.post('/deleteMedicineData',authenticateJWT, MedicineController.deleteMedicineData);
 
 router.post('/updateDoctor', DoctorController.updateDoctor);
 router.post('/deleteDoctor', DoctorController.deleteDoctor);

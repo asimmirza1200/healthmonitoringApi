@@ -45,6 +45,7 @@ const getAssignDoctor =  (req, res,next) =>{
       
 };
 
+
 const singleDoctor =  (req, res,next) =>{
     let docotrId=req.body.docotrId
     Doctor.findById(docotrId).then(response =>{

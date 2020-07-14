@@ -23,7 +23,7 @@ const allDoctor =  (req, res,next) =>{
 const getAssignDoctor =  (req, res,next) =>{
     const query = AssignDoctor.find();
     query.select('_id doctor_id patient_id');
-    query.populate('DoctorList','*');
+    query.populate('DoctorList','_id phonenumber');
     query.exec(function(error,result){
        if(error){
         res.json({

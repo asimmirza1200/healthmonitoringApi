@@ -21,23 +21,25 @@ const allDoctor =  (req, res,next) =>{
 };
 
 const getAssignDoctor =  (req, res,next) =>{
-    const query = AssignDoctor.find();
+    const query = AssignDoctor.find({"patient_id":req.body.patient_id});
     query.select('_id doctor_id patient_id');
     query.populate('doctor_id','_id doctorname fathername address qualification phonenumber specialization password createdAt updatedAt __v accessToken');
+    query.populate('patient_id','_id patientname fathername address deviceid phonenumber disease password createdAt updatedAt __v accessToken');
+
     query.exec(function(error,result){
        if(error){
         res.json({
             message:"An Error occured"
         })     
       }else{
-        var obj = JSON.parse(result)[0];
-        obj.doctorData = obj.doctor_id;
-        delete obj.doctor_id;
-        
-        json = JSON.stringify([obj]);
-        res.json({
-            json
+        result = JSON.stringify(result).replace("doctor_id", "DoctorData");
+        result = JSON.stringify(result).replace("patient_id", "PatientData");
 
+        result=JSON.parse(result);
+        result=JSON.parse(result);
+
+        res.json({
+                 result
         })       }
     });
       

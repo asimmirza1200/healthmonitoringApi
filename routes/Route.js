@@ -32,21 +32,21 @@ const authenticateJWT = (req, res, next) => {
 
 
 router.get('/', DoctorController.allDoctor)
-router.get('/getAllDoctor',authenticateJWT, DoctorController.allDoctor)
-router.post('/findDoctor',authenticateJWT, DoctorController.singleDoctor);
-router.post('/insertDoctor',authenticateJWT, DoctorController.insertDoctor);
-router.post('/assignDoctor',authenticateJWT, DoctorController.assignDoctor);
-router.get('/getAssignDoctor', DoctorController.getAssignDoctor);
+router.get('/getAllDoctor', DoctorController.allDoctor)
+router.post('/findDoctor', DoctorController.singleDoctor);
+router.post('/insertDoctor', DoctorController.insertDoctor);
+router.post('/assignDoctor', DoctorController.assignDoctor);
+router.post('/getAssignDoctor',authenticateJWT, DoctorController.getAssignDoctor);
 
-router.post('/updateDoctor',authenticateJWT, DoctorController.updateDoctor);
-router.post('/deleteDoctor',authenticateJWT, DoctorController.deleteDoctor);
+router.post('/updateDoctor', DoctorController.updateDoctor);
+router.post('/deleteDoctor', DoctorController.deleteDoctor);
 router.post('/loginDoctor', DoctorController.loginDoctor);
 
-router.get('/getAllPatient',authenticateJWT, PatientController.allPatient)
-router.post('/findPatient',authenticateJWT, PatientController.singlePatient);
-router.post('/insertPatient',authenticateJWT, PatientController.insertPatient);
-router.post('/updatePatient',authenticateJWT, PatientController.updatePatient);
-router.post('/deletePatient',authenticateJWT, PatientController.deletePatient);
+router.get('/getAllPatient', PatientController.allPatient)
+router.post('/findPatient', PatientController.singlePatient);
+router.post('/insertPatient', PatientController.insertPatient);
+router.post('/updatePatient', PatientController.updatePatient);
+router.post('/deletePatient', PatientController.deletePatient);
 router.post('/loginPatient', PatientController.loginPatient);
 
 module.exports=router

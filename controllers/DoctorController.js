@@ -58,7 +58,7 @@ const loginDoctor =  (req, res,next) =>{
                     })
                     .catch(error=>{
                         res.json({
-                            message:"An Error occured"
+                            message:error
                         })
                     })
 

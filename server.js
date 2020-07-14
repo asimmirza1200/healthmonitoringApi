@@ -5,7 +5,7 @@ const morgan= require('morgan')
 
 const doctorRoute = require('./routes/Route');
 // "mongodb+srv://asimirza:Asimirza1200@cluster0-tsbkn.mongodb.net/test?retryWrites=true&w=majority" || 
-var mongoDB ='mongodb+srv://asimirza:Asimirza1200@cluster0-tsbkn.mongodb.net/test?retryWrites=true&w=majority ||  mongodb://localhost:27017/healthmonitoring';
+var mongoDB ='mongodb+srv://asimirza:Asimirza1200@cluster0-tsbkn.mongodb.net/test?retryWrites=true ||  mongodb://localhost:27017/healthmonitoring';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 
 var db = mongoose.connection;

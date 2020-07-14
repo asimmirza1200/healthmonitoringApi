@@ -23,7 +23,7 @@ const allDoctor =  (req, res,next) =>{
 const getAssignDoctor =  (req, res,next) =>{
     const query = AssignDoctor.find();
     query.select('_id doctor_id patient_id');
-    query.populate('doctor_id','*');
+    query.populate('doctor_id','_id doctorname fathername address qualification phonenumber specialization password createdAt updatedAt __v accessToken');
     query.exec(function(error,result){
        if(error){
         res.json({

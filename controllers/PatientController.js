@@ -57,7 +57,7 @@ const loginPatient =  (req, res,next) =>{
                     })
                     .catch(error=>{
                         res.json({
-                            message:"An Error occured"
+                            message:response[0]._id
                         })
                     })
 

@@ -32,8 +32,8 @@ const getAssignDoctor =  (req, res,next) =>{
             message:"An Error occured"
         })     
       }else{
-        result = JSON.stringify(result).replace("doctor_id", "DoctorData");
-        result = JSON.stringify(result).replace("patient_id", "PatientData");
+        result = JSON.stringify(result).replace(new RegExp("doctor_id", 'g'), "DoctorData");
+        result = JSON.stringify(result).replace(new RegExp("patient_id", 'g'), "PatientData");
 
         result=JSON.parse(result);
         result=JSON.parse(result);

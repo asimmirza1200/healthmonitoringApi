@@ -30,8 +30,13 @@ const getAssignDoctor =  (req, res,next) =>{
             message:"An Error occured"
         })     
       }else{
+        var obj = JSON.parse(result)[0];
+        obj.doctorData = obj.doctor_id;
+        delete obj.doctor_id;
+        
+        json = JSON.stringify([obj]);
         res.json({
-            result
+            json
 
         })       }
     });

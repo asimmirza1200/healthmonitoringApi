@@ -1,6 +1,7 @@
 const Doctor =require( "../models/DoctorModel");
 const jwt = require('jsonwebtoken');
 const accessTokenSecret = 'youraccesstokensecret';
+const AssignDoctor =require( "../models/AssignDoctorModel");
 
 
 
@@ -16,6 +17,24 @@ const allDoctor =  (req, res,next) =>{
             message:"An Error occured"
         })
     })
+      
+};
+
+const getAssignDoctor =  (req, res,next) =>{
+    const query = AssignDoctor.find();
+    query.select('_id doctor_id patient_id');
+    query.populate('doctor_id','_id phonenumber');
+    query.exec(function(error,result){
+       if(error){
+        res.json({
+            message:"An Error occured"
+        })     
+      }else{
+        res.json({
+            result
+
+        })       }
+    });
       
 };
 
@@ -115,7 +134,23 @@ const insertDoctor =  (req, res,next) =>{
     })
       
 };
-
+const assignDoctor =  (req, res,next) =>{
+    let doctor= new AssignDoctor({
+        doctor_id: req.body.doctor_id,
+        patient_id: req.body.patient_id,
+    })
+    doctor.save(doctor).then(response =>{
+        res.json({
+            message:"Doctor Assigned Successfully"
+        })
+    })
+    .catch(error=>{
+        res.json({
+            message:"An Error occured"
+        })
+    })
+      
+};
 const updateDoctor =  (req, res,next) =>{
     let docotrId=req.body.docotrId
     let updatedoctor= {
@@ -155,5 +190,5 @@ const deleteDoctor =  (req, res,next) =>{
 };
 
 module.exports={
-    allDoctor,singleDoctor,updateDoctor,deleteDoctor,insertDoctor,loginDoctor
+    allDoctor,singleDoctor,updateDoctor,deleteDoctor,insertDoctor,loginDoctor,assignDoctor,getAssignDoctor
 }

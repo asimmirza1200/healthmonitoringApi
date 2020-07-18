@@ -120,21 +120,21 @@ const loginDoctor =  (req, res,next) =>{
 };
 
 const insertDoctor =  (req, res,next) =>{
-     req=JSON.stringify(req).replace('}: ""',"")
-     req=JSON.parse(req)
+    let  req2=JSON.stringify(req.body).replace('}: ""',"")
+    req2=JSON.parse(req2)
     let doctor= new Doctor({
-        doctorname: req.body.doctorname, 
-        fathername: req.body.fathername,
-        address: req.body.address,
-        qualification: req.body.qualification,
-        phonenumber: req.body.phonenumber,
-        specialization: req.body.specialization,
-        password: req.body.password,
+        doctorname: req2.doctorname, 
+        fathername: reqreq2.fathername,
+        address: req2.address,
+        qualification: req2.qualification,
+        phonenumber: req2.phonenumber,
+        specialization: req2.specialization,
+        password: req2.password,
         accessToken:""
     })
     doctor.save(doctor).then(response =>{
         res.json({
-            req:req.body,
+            req:req2,
             message:"Doctor Added Successfully"
         })
     })

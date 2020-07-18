@@ -120,7 +120,9 @@ const loginDoctor =  (req, res,next) =>{
 };
 
 const insertDoctor =  (req, res,next) =>{
-    res.json(req)
+    res.json({
+            req
+        })
     let doctor= new Doctor({
         doctorname: req.body.doctorname, 
         fathername: req.body.fathername,

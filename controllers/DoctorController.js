@@ -133,7 +133,7 @@ const insertDoctor =  (req, res,next) =>{
     })
     doctor.save(doctor).then(response =>{
         res.json({
-            req:req,
+            req:req.body,
             message:"Doctor Added Successfully"
         })
     })

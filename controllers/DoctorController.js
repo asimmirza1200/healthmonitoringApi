@@ -121,6 +121,7 @@ const loginDoctor =  (req, res,next) =>{
 
 const insertDoctor =  (req, res,next) =>{
     let  req2=JSON.stringify(req.body).replace('}: ""',"}")
+    
     req2=JSON.parse(req2)
     let doctor= new Doctor({
         doctorname: req2.doctorname, 

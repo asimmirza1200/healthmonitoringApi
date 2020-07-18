@@ -120,9 +120,7 @@ const loginDoctor =  (req, res,next) =>{
 };
 
 const insertDoctor =  (req, res,next) =>{
-    res.json({
-            req
-        })
+    
     let doctor= new Doctor({
         doctorname: req.body.doctorname, 
         fathername: req.body.fathername,
@@ -135,6 +133,7 @@ const insertDoctor =  (req, res,next) =>{
     })
     doctor.save(doctor).then(response =>{
         res.json({
+            req:req,
             message:"Doctor Added Successfully"
         })
     })

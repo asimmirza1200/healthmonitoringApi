@@ -120,8 +120,11 @@ const loginDoctor =  (req, res,next) =>{
 };
 
 const insertDoctor =  (req, res,next) =>{
-    let  req2=JSON.stringify(req.body).replace('}: ""',"}")
-    
+    let  req2=JSON.stringify(req.body).replace('}":""}',"}").replace('{"{',"{").replace(/\\/g,"")
+    // res.json({
+    //             req:req2,
+    //             message:"Doctor Added Successfully"
+    //         })
     req2=JSON.parse(req2)
     let doctor= new Doctor({
         doctorname: req2.doctorname, 
@@ -187,10 +190,13 @@ const updateDoctor =  (req, res,next) =>{
 };
 
 const deleteDoctor =  (req, res,next) =>{
-    let docotrId=req.body.docotrId
+    let  req2=JSON.stringify(req.body).replace('}":""}',"}").replace('{"{',"{").replace(/\\/g,"")
+    req2=JSON.parse(req2)
+
+    let docotrId=req2.docotrId
     Doctor.findByIdAndRemove(docotrId).then(response =>{
         res.json({
-            message:"Doctor Deleted Successfully"
+            message:req2
         })
     })
     .catch(error=>{

@@ -93,14 +93,20 @@ const loginPatient =  (req, res,next) =>{
 };
 
 const insertPatient =  (req, res,next) =>{
+    let  req2=JSON.stringify(req.body).replace('}":""}',"}").replace('{"{',"{").replace(/\\/g,"")
+    // res.json({
+    //             req:req2,
+    //             message:"Doctor Added Successfully"
+    //         })
+    req2=JSON.parse(req2)
     let patient= new Patient({
-        patientname: req.body.patientname, 
-        fathername: req.body.fathername,
-        address: req.body.address,
-        deviceid: req.body.deviceid,
-        phonenumber: req.body.phonenumber,
-        disease: req.body.disease,
-        password: req.body.password,
+        patientname: req2.patientname, 
+        fathername: req2.fathername,
+        address: req2.address,
+        deviceid: req2.deviceid,
+        phonenumber: req2.phonenumber,
+        disease: req2.disease,
+        password: req2.password,
         accessToken:""
 
     })
@@ -141,7 +147,9 @@ const updatePatient =  (req, res,next) =>{
 };
 
 const deletePatient =  (req, res,next) =>{
-    let patientId=req.body.patientId
+    let  req2=JSON.stringify(req.body).replace('}":""}',"}").replace('{"{',"{").replace(/\\/g,"")
+    req2=JSON.parse(req2)
+    let patientId=req2.patientId
     Patient.findByIdAndRemove(patientId).then(response =>{
         res.json({
             message:"Patient Deleted Successfully"

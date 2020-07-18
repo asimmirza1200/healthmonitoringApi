@@ -126,7 +126,7 @@ const insertDoctor =  (req, res,next) =>{
         fathername: req.body.fathername,
         address: req.body.address,
         qualification: req.body.qualification,
-        phonenumber: req.body.,phonenumber
+        phonenumber: req.body.phonenumber
         specialization: req.body.specialization,
         password: req.body.password,
         accessToken:""

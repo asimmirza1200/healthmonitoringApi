@@ -21,7 +21,10 @@ const allDoctor =  (req, res,next) =>{
 };
 
 const getAssignDoctor =  (req, res,next) =>{
-    const query = AssignDoctor.find({"patient_id":req.body.patient_id});
+    let  req2=JSON.stringify(req.body).replace('}":""}',"}").replace('{"{',"{").replace(/\\/g,"")
+  
+    req2=JSON.parse(req2)
+    const query = AssignDoctor.find({"patient_id":req2.patient_id});
     query.select('_id doctor_id patient_id');
     query.populate('doctor_id','_id doctorname fathername address qualification phonenumber specialization password createdAt updatedAt __v accessToken');
     query.populate('patient_id','_id patientname fathername address deviceid phonenumber disease password createdAt updatedAt __v accessToken');
@@ -44,7 +47,33 @@ const getAssignDoctor =  (req, res,next) =>{
     });
       
 };
+const getAssignPatient =  (req, res,next) =>{
+    let  req2=JSON.stringify(req.body).replace('}":""}',"}").replace('{"{',"{").replace(/\\/g,"")
+  
+    req2=JSON.parse(req2)
+    const query = AssignDoctor.find({"doctor_id":req2.doctor_id});
+    query.select('_id doctor_id patient_id');
+    query.populate('doctor_id','_id doctorname fathername address qualification phonenumber specialization password createdAt updatedAt __v accessToken');
+    query.populate('patient_id','_id patientname fathername address deviceid phonenumber disease password createdAt updatedAt __v accessToken');
 
+    query.exec(function(error,result){
+       if(error){
+        res.json({
+            message:"An Error occured"
+        })     
+      }else{
+        result = JSON.stringify(result).replace(new RegExp("doctor_id", 'g'), "DoctorData");
+        result = JSON.stringify(result).replace(new RegExp("patient_id", 'g'), "PatientData");
+
+        result=JSON.parse(result);
+        result=JSON.parse(result);
+
+        res.json({
+                 result
+        })       }
+    });
+      
+};
 
 const singleDoctor =  (req, res,next) =>{
     let docotrId=req.body.docotrId
@@ -150,9 +179,12 @@ const insertDoctor =  (req, res,next) =>{
       
 };
 const assignDoctor =  (req, res,next) =>{
+    let  req2=JSON.stringify(req.body).replace('}":""}',"}").replace('{"{',"{").replace(/\\/g,"")
+
+    req2=JSON.parse(req2)
     let doctor= new AssignDoctor({
-        doctor_id: req.body.doctor_id,
-        patient_id: req.body.patient_id,
+        doctor_id: req2.doctor_id,
+        patient_id: req2.patient_id,
     })
     doctor.save(doctor).then(response =>{
         res.json({
@@ -193,8 +225,8 @@ const deleteDoctor =  (req, res,next) =>{
     let  req2=JSON.stringify(req.body).replace('}":""}',"}").replace('{"{',"{").replace(/\\/g,"")
     req2=JSON.parse(req2)
 
-    let docotrId=req2.docotrId
-    Doctor.findByIdAndRemove(docotrId).then(response =>{
+    let doctorId=req2.doctorId
+    Doctor.findByIdAndRemove(doctorId).then(response =>{
         res.json({
             message:req2
         })
@@ -208,5 +240,5 @@ const deleteDoctor =  (req, res,next) =>{
 };
 
 module.exports={
-    allDoctor,singleDoctor,updateDoctor,deleteDoctor,insertDoctor,loginDoctor,assignDoctor,getAssignDoctor
+    getAssignPatient,allDoctor,singleDoctor,updateDoctor,deleteDoctor,insertDoctor,loginDoctor,assignDoctor,getAssignDoctor
 }

@@ -1,6 +1,7 @@
 const Patient =require( "../models/PatientModel");
 const jwt = require('jsonwebtoken');
 const accessTokenSecret = 'youraccesstokensecret';
+const Doctor =require( "../models/DoctorModel");
 
 const allPatient =  (req, res,next) =>{
     Patient.find().then(response =>{
@@ -15,7 +16,30 @@ const allPatient =  (req, res,next) =>{
     })
       
 };
+const getDashboardData =  (req, res,next) =>{
+    Patient.find().then(response =>{
+        Doctor.find().then(response2 =>{
+            res.json({
+                doctors:response2.length,
+                patients:response.length
 
+            })
+        })
+        .catch(error=>{
+            res.json({
+                message:"An Error occured"
+            })
+        })
+
+      
+    })
+    .catch(error=>{
+        res.json({
+            message:"An Error occured"
+        })
+    })
+      
+};
 const singlePatient =  (req, res,next) =>{
     let patientId=req.body.patientId
     Patient.findById(patientId).then(response =>{
@@ -152,7 +176,7 @@ const deletePatient =  (req, res,next) =>{
     let patientId=req2.patientId
     Patient.findByIdAndRemove(patientId).then(response =>{
         res.json({
-            message:"Patient Deleted Successfully"
+            message:"Patient Deleted Successfully"+patientId
         })
     })
     .catch(error=>{
@@ -164,5 +188,5 @@ const deletePatient =  (req, res,next) =>{
 };
 
 module.exports={
-    allPatient,singlePatient,updatePatient,deletePatient,insertPatient,loginPatient
+    getDashboardData, allPatient,singlePatient,updatePatient,deletePatient,insertPatient,loginPatient
 }

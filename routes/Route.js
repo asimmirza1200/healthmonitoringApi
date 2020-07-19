@@ -37,7 +37,8 @@ router.get('/getAllDoctor', DoctorController.allDoctor)
 router.post('/findDoctor', DoctorController.singleDoctor);
 router.post('/insertDoctor', DoctorController.insertDoctor);
 router.post('/assignDoctor', DoctorController.assignDoctor);
-router.post('/getAssignDoctor',authenticateJWT, DoctorController.getAssignDoctor);
+router.post('/getAssignDoctor', DoctorController.getAssignDoctor);
+router.post('/getAssignPatient', DoctorController.getAssignPatient);
 
 router.post('/getAssignMedicineData',authenticateJWT, MedicineController.getAssignMedicineData);
 router.post('/insertMedicineData',authenticateJWT, MedicineController.insertMedicineData);
@@ -46,6 +47,8 @@ router.post('/deleteMedicineData',authenticateJWT, MedicineController.deleteMedi
 router.post('/updateDoctor', DoctorController.updateDoctor);
 router.post('/deleteDoctor', DoctorController.deleteDoctor);
 router.post('/loginDoctor', DoctorController.loginDoctor);
+
+router.get('/getDashboardData', PatientController.getDashboardData)
 
 router.get('/getAllPatient', PatientController.allPatient)
 router.post('/findPatient', PatientController.singlePatient);

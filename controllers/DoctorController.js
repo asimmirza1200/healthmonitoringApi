@@ -26,8 +26,8 @@ const getAssignDoctor =  (req, res,next) =>{
     req2=JSON.parse(req2)
     const query = AssignDoctor.find({"patient_id":req2.patient_id});
     query.select('_id doctor_id patient_id');
-    query.populate('doctor_id','_id doctorname fathername address qualification phonenumber specialization password createdAt updatedAt __v accessToken');
-    query.populate('patient_id','_id patientname fathername address deviceid phonenumber disease password createdAt updatedAt __v accessToken');
+    query.populate('doctor_id','_id doctorname fathername address qualification phonenumber specialization password createdAt updatedAt __v accessToken firbaseToken');
+    query.populate('patient_id','_id patientname fathername address deviceid phonenumber disease password createdAt updatedAt __v accessToken firbaseToken');
 
     query.exec(function(error,result){
        if(error){

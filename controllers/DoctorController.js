@@ -53,8 +53,8 @@ const getAssignPatient =  (req, res,next) =>{
     req2=JSON.parse(req2)
     const query = AssignDoctor.find({"doctor_id":req2.doctor_id});
     query.select('_id doctor_id patient_id');
-    query.populate('doctor_id','_id doctorname fathername address qualification phonenumber specialization password createdAt updatedAt __v accessToken');
-    query.populate('patient_id','_id patientname fathername address deviceid phonenumber disease password createdAt updatedAt __v accessToken');
+    query.populate('doctor_id','_id doctorname fathername address qualification phonenumber specialization password createdAt updatedAt __v accessToken firbaseToken');
+    query.populate('patient_id','_id patientname fathername address deviceid phonenumber disease password createdAt updatedAt __v accessToken firbaseToken');
 
     query.exec(function(error,result){
        if(error){
@@ -101,6 +101,8 @@ const loginDoctor =  (req, res,next) =>{
 
                 const accessToken = jwt.sign({ phonenumber: response[0].phonenumber,  password: response[0].password }, accessTokenSecret);
                     response[0].accessToken=accessToken
+                    response[0].firbaseToken=token
+
                     let updateToken= {
                         accessToken: accessToken,
                         firbaseToken:token

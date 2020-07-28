@@ -31,6 +31,8 @@ const insertMedicineData =  (req, res,next) =>{
         symptom: req.body.symptom,
         doctor_id: req.body.doctor_id,
         patient_id: req.body.patient_id,
+        doctorname: req.body.doctorname,
+
     })
     medicinePrescription.save(medicinePrescription).then(response =>{
         res.json({

@@ -7,6 +7,7 @@ const medicinePrescriptionSchema = new Schema({
     medicine: {type: String},
     symptom: {type: String},
     disease: {type: String},
+    doctorname:{type: String},
     doctor_id:  {type: Schema.Types.ObjectId, ref : 'Doctor', required: true},
     patient_id:  {type: Schema.Types.ObjectId, ref : 'Patient', required: true},
 },{timestamps:true});

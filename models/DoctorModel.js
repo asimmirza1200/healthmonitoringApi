@@ -13,6 +13,8 @@ const doctorSchema = new Schema({
     specialization: {type: String},
     password: {type: String},
     accessToken: {type: String},
+    firbaseToken: {type: String},
+
 },{timestamps:true});
 
 const doctor = mongoose.model('Doctor', doctorSchema )

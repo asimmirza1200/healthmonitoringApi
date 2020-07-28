@@ -13,6 +13,7 @@ const patientSchema = new Schema({
     disease: {type: String},
     password: {type: String},
     accessToken: {type: String},
+    firbaseToken: {type: String},
 
 },{timestamps:true});
 

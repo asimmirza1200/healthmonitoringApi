@@ -59,6 +59,7 @@ const singlePatient =  (req, res,next) =>{
 const loginPatient =  (req, res,next) =>{
     let phonenumber=req.body.phonenumber
     let password=req.body.password
+    let token=req.body.token
 
     Patient.find({"phonenumber":phonenumber}).then(response =>{
         if(response!=null){
@@ -68,7 +69,9 @@ const loginPatient =  (req, res,next) =>{
                 const accessToken = jwt.sign({ phonenumber: response[0].phonenumber,  password: response[0].password }, accessTokenSecret);
                     response[0].accessToken=accessToken
                     let updateToken= {
-                        accessToken: accessToken
+                        accessToken: accessToken,
+                        firbaseToken:token
+
                     }
                     Patient.findByIdAndUpdate(response[0]._id,{$set :updateToken}).then(response1 =>{
                     
@@ -131,7 +134,8 @@ const insertPatient =  (req, res,next) =>{
         phonenumber: req2.phonenumber,
         disease: req2.disease,
         password: req2.password,
-        accessToken:""
+        accessToken:"",
+        firbaseToken:""
 
     })
     patient.save(patient).then(response =>{

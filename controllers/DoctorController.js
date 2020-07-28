@@ -93,6 +93,7 @@ const singleDoctor =  (req, res,next) =>{
 const loginDoctor =  (req, res,next) =>{
     let phonenumber=req.body.phonenumber
     let password=req.body.password
+    let token=req.body.token
 
     Doctor.find({"phonenumber":phonenumber}).then(response =>{
         if(response!=null){
@@ -101,7 +102,9 @@ const loginDoctor =  (req, res,next) =>{
                 const accessToken = jwt.sign({ phonenumber: response[0].phonenumber,  password: response[0].password }, accessTokenSecret);
                     response[0].accessToken=accessToken
                     let updateToken= {
-                        accessToken: accessToken
+                        accessToken: accessToken,
+                        firbaseToken:token
+
                     }
                     Doctor.findByIdAndUpdate(response[0]._id,{$set :updateToken}).then(response1 =>{
                     
@@ -163,7 +166,9 @@ const insertDoctor =  (req, res,next) =>{
         phonenumber: req2.phonenumber,
         specialization: req2.specialization,
         password: req2.password,
-        accessToken:""
+        accessToken:"",
+        firbaseToken:""
+
     })
     doctor.save(doctor).then(response =>{
         res.json({

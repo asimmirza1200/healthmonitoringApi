@@ -68,6 +68,8 @@ const loginPatient =  (req, res,next) =>{
 
                 const accessToken = jwt.sign({ phonenumber: response[0].phonenumber,  password: response[0].password }, accessTokenSecret);
                     response[0].accessToken=accessToken
+                    response[0].firbaseToken=token
+
                     let updateToken= {
                         accessToken: accessToken,
                         firbaseToken:token

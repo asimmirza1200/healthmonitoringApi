@@ -3,6 +3,7 @@ const router=express.Router()
 
 const DoctorController=require("../controllers/DoctorController")
 const PatientController=require("../controllers/PatientController")
+const NotificationAlertController=require("../controllers/NotificationAlertController")
 
 const jwt = require('jsonwebtoken');
 const MedicineController = require("../controllers/MedicineController");
@@ -56,5 +57,7 @@ router.post('/insertPatient', PatientController.insertPatient);
 router.post('/updatePatient', PatientController.updatePatient);
 router.post('/deletePatient', PatientController.deletePatient);
 router.post('/loginPatient', PatientController.loginPatient);
+
+router.post('/sendAlertNotification', NotificationAlertController.sendAlertNotification);
 
 module.exports=router

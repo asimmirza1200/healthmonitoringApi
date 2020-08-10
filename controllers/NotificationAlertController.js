@@ -4,6 +4,7 @@ const Patient =require( "../models/PatientModel");
 const admin = require("firebase-admin");
 var serviceAccount = require("./serviceAccountKey.json");
 const Admin =require( "../models/AdminModel");
+var request = require('request');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -58,25 +59,26 @@ const sendAlertNotification =  (req, res,next) =>{
     const message_notification = {
         data: {
            title: result[0].PatientData.patientname,
-           text: "Doctor I am in critical situation please contact with me"
-              
+           text: "Doctor I am in critical situation please contact with me",
+              to:registrationTokens
         }
         };
     const options =  notification_options
        
-      admin.messaging().sendToDevice(registrationTokens, message_notification, options)
-      .then( response => {
+//       admin.messaging().sendToDevice(registrationTokens, message_notification, options)
+//       .then( response => {
 
-       res.status(200).send("Notification sent successfully"+registrationTokens.toString())
-//        res.json({
+//        res.status(200).send("Notification sent successfully"+registrationTokens.toString())
+// //        res.json({
 
-//         result
+// //         result
 
-// })  
-      })
-      .catch( error => {
-          console.log(error);
-      });
+// // })  
+//       })
+//       .catch( error => {
+//           console.log(error);
+//       });
+   request.post('https://fcm.googleapis.com/fcm/send', {form:message_notification})
 
           
     

@@ -45,7 +45,7 @@ const sendAlertNotification =  (req, res,next) =>{
          }
           
             Admin.find().then(response =>{
-                registrationTokens[registrationTokens.length]= response.result[0].firbaseToken
+                registrationTokens[registrationTokens.length]= response.firbaseToken
                 console.log(response)
             })
             .catch(error=>{

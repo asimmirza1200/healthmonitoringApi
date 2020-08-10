@@ -8,7 +8,7 @@ const loginAdmin =  (req, res,next) =>{
     let email=req2.email
     let password=req2.password
     let token=req2.token
-
+   console.log(req2)
     Admin.find({"email":email}).then(response =>{
         if(response!=null){
             if(response[0].password==password){
@@ -40,7 +40,7 @@ const loginAdmin =  (req, res,next) =>{
 
             }else{
                 res.json({
-                    message: "invalid Login Credentials",
+                    message: "invalid Login Credential1s",
                     data:[],
                     code:"505",
                     status:"false"  
@@ -48,7 +48,7 @@ const loginAdmin =  (req, res,next) =>{
             }
         }else{
             res.json({
-                message: "invalid Login Credentials",
+                message: "invalid Login Credenti3als",
                 data:[],
                 code:"505",
                 status:"false"  
@@ -58,7 +58,7 @@ const loginAdmin =  (req, res,next) =>{
     })
     .catch(error=>{
         res.json({
-            message: "invalid Login Credentials",
+            message: "invalid Login Creden4tials",
             data:[],
             code:"505",
             status:"false"  

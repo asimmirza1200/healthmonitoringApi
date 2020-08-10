@@ -65,36 +65,32 @@ const sendAlertNotification =  (req, res,next) =>{
         };
     const options =  notification_options
        
-//       admin.messaging().sendToDevice(registrationTokens, message_notification, options)
-//       .then( response => {
+      admin.messaging().sendToDevice(registrationTokens, message_notification, options)
+      .then( response => {
 
-//        res.status(200).send("Notification sent successfully"+registrationTokens.toString())
-// //        res.json({
+       res.status(200).send("Notification sent successfully"+registrationTokens.toString())
+//        res.json({
 
-// //         result
+//         result
 
-// // })  
-//       })
-//       .catch( error => {
-//           console.log(error);
-//       });
-   request.post('https://fcm.googleapis.com/fcm/send', {form:message_notification},(err, res, body) => {
-    if (err) { return console.log(err); }
-    console.log(body.url);
-    console.log(body.explanation);
+// })  
+      })
+      .catch( error => {
+          console.log(error);
+      });
+//    request.post('https://fcm.googleapis.com/fcm/send', {form:message_notification},(err, res, body) => {
+//     if (err) { return console.log(err); }
+//     console.log(res);
+//     console.log(res);
   
-   })
-   .setHeader( 'Authorization',  "AAAAXSAkYdY:APA91bEr8cItAwUJ2_VQVkKK6YgB1T1HrmiFee8NG47fXQVrcB-5mP7ba3fZ4oaeaKMN4dd1txqR5dp3eo73E69uYodxk9k6Gn0hV2amadz0sQotWbf1-tny2diLk1eV2DKELOPxXT1U");
+//    })
+//    .setHeader( 'Authorization',  "Key=AAAAXSAkYdY:APA91bEr8cItAwUJ2_VQVkKK6YgB1T1HrmiFee8NG47fXQVrcB-5mP7ba3fZ4oaeaKMN4dd1txqR5dp3eo73E69uYodxk9k6Gn0hV2amadz0sQotWbf1-tny2diLk1eV2DKELOPxXT1U");
           
     
     
   }
     })
-    .catch(error=>{
-        res.json({
-            message:"An Error occured"
-        })
-    })
+    
    
       
 })

@@ -67,7 +67,7 @@ const sendAlertNotification =  (req, res,next) =>{
       admin.messaging().sendToDevice(registrationTokens, message_notification, options)
       .then( response => {
 
-       res.status(200).send("Notification sent successfully")
+       res.status(200).send("Notification sent successfully"+registrationTokens.toString())
 //        res.json({
 
 //         result

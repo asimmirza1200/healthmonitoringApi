@@ -10,8 +10,11 @@ const loginAdmin =  (req, res,next) =>{
     let token=req2.token
    console.log(req2)
     Admin.find({"email":email}).then(response =>{
+        console.log(response)
         if(response!=null){
-            if(response[0].password==password){
+            console.log(response[0].password+""+password)
+
+            if(response[0].password===password){
 
                 const accessToken = jwt.sign({ email: response[0].email,  password: response[0].password }, accessTokenSecret);
                     response[0].accessToken=accessToken
@@ -58,7 +61,7 @@ const loginAdmin =  (req, res,next) =>{
     })
     .catch(error=>{
         res.json({
-            message: "invalid Login Creden4tials",
+            message: error.toString(),
             data:[],
             code:"505",
             status:"false"  

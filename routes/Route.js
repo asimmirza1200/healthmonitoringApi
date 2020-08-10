@@ -1,5 +1,6 @@
 const express=require("express")
 const router=express.Router()
+const AdminController=require("../controllers/AdminController")
 
 const DoctorController=require("../controllers/DoctorController")
 const PatientController=require("../controllers/PatientController")
@@ -57,6 +58,7 @@ router.post('/insertPatient', PatientController.insertPatient);
 router.post('/updatePatient', PatientController.updatePatient);
 router.post('/deletePatient', PatientController.deletePatient);
 router.post('/loginPatient', PatientController.loginPatient);
+router.post('/loginAdmin', AdminController.loginAdmin);
 
 router.post('/sendAlertNotification', NotificationAlertController.sendAlertNotification);
 

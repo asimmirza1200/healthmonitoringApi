@@ -3,6 +3,7 @@ const AssignDoctor =require( "../models/AssignDoctorModel");
 const Patient =require( "../models/PatientModel");
 const admin = require("firebase-admin");
 var serviceAccount = require("./serviceAccountKey.json");
+const Admin =require( "../models/AdminModel");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -41,8 +42,19 @@ const sendAlertNotification =  (req, res,next) =>{
           var registrationTokens = [];
           for (let i = 0; i < result.length; i++) {
           registrationTokens[i] = result[i].DoctorData.firbaseToken;
-        
-    }
+         }
+          
+            Admin.find().then(response =>{
+                registrationTokens[registrationTokens.length]= response.result[0].firbaseToken
+                console.log(response)
+            })
+            .catch(error=>{
+                res.json({
+                    message:"An Error occured"
+                })
+            })
+              
+       
     const message_notification = {
         data: {
            title: result[0].PatientData.patientname,

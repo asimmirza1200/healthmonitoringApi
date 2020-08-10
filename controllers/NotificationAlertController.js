@@ -46,8 +46,23 @@ const sendAlertNotification =  (req, res,next) =>{
          }
           
             Admin.find().then(response =>{
-                registrationTokens[registrationTokens.length]= response[0].firbaseToken
+                const message_notification = {
+                    notification: {
+                       title: result[0].PatientData.patientname,
+                       text: "Doctor I am in critical situation please contact with me",
+                    },
+                        to: response[0].firbaseToken
+            
+                    
+                    };
                 console.log(response)
+                request.post(   {headers:{'Authorization': "Key=AAAAXSAkYdY:APA91bEr8cItAwUJ2_VQVkKK6YgB1T1HrmiFee8NG47fXQVrcB-5mP7ba3fZ4oaeaKMN4dd1txqR5dp3eo73E69uYodxk9k6Gn0hV2amadz0sQotWbf1-tny2diLk1eV2DKELOPxXT1U","Content-Type":"application/json"},
+                url: 'https://fcm.googleapis.com/fcm/send', body:JSON.stringify(message_notification)},(err, res, body) => {
+                    if (err) { return console.log(err); }
+                    console.log(res);
+                    console.log(res);
+                
+                })
             })
             .catch(error=>{
                 res.json({
@@ -57,10 +72,9 @@ const sendAlertNotification =  (req, res,next) =>{
               
        
     const message_notification = {
-        data: {
+        notification: {
            title: result[0].PatientData.patientname,
            text: "Doctor I am in critical situation please contact with me",
-              to:registrationTokens
         }
         };
     const options =  notification_options
@@ -68,7 +82,7 @@ const sendAlertNotification =  (req, res,next) =>{
       admin.messaging().sendToDevice(registrationTokens, message_notification, options)
       .then( response => {
 
-       res.status(200).send("Notification sent successfully"+registrationTokens.toString())
+       res.status(200).send("Notification sent successfully")
 //        res.json({
 
 //         result
@@ -78,13 +92,7 @@ const sendAlertNotification =  (req, res,next) =>{
       .catch( error => {
           console.log(error);
       });
-//    request.post('https://fcm.googleapis.com/fcm/send', {form:message_notification},(err, res, body) => {
-//     if (err) { return console.log(err); }
-//     console.log(res);
-//     console.log(res);
   
-//    })
-//    .setHeader( 'Authorization',  "Key=AAAAXSAkYdY:APA91bEr8cItAwUJ2_VQVkKK6YgB1T1HrmiFee8NG47fXQVrcB-5mP7ba3fZ4oaeaKMN4dd1txqR5dp3eo73E69uYodxk9k6Gn0hV2amadz0sQotWbf1-tny2diLk1eV2DKELOPxXT1U");
           
     
     
